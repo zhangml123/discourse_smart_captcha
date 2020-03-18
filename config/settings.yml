@@ -1,0 +1,16 @@
+plugins:
+  discourse_smart_captcha:
+    default: false
+    client: true
+  app_key:
+    default: ""
+    client: true
+  access_key:
+    default: ""
+  access_secret:
+    default: ""
+  remote_ip:
+    default: ""
+security:    
+  content_security_policy:
+    default: false

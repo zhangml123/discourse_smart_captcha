@@ -1,0 +1,9 @@
+en:
+  login:
+    verify_failed: "captcha verify failed!"
+  site_settings:
+    discourse_smart_captcha: "open smart captcha."
+    app_key: "app key"
+    access_key: "access key"
+    access_secret: "access secret"
+    remote_ip: "remote ip"   
