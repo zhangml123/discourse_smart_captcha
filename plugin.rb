@@ -20,6 +20,7 @@ after_initialize do
 		    end
 			params.require(:email)
 		    params.require(:username)
+		    params.require(:invite_code) if SiteSetting.require_invite_code
 		    params.permit(:user_fields)
 
 		    unless SiteSetting.allow_new_registrations
@@ -34,6 +35,10 @@ after_initialize do
 		      return fail_with("login.email_too_long")
 		    end
 
+		    if SiteSetting.require_invite_code && SiteSetting.invite_code.strip.downcase != params[:invite_code].strip.downcase
+		      return fail_with("login.wrong_invite_code")
+		    end
+
 		    if clashing_with_existing_route?(params[:username]) || User.reserved_username?(params[:username])
 		      return fail_with("login.reserved_username")
 		    end
@@ -41,11 +46,22 @@ after_initialize do
 		    params[:locale] ||= I18n.locale unless current_user
 
 		    new_user_params = user_params.except(:timezone)
-		    user = User.unstage(new_user_params)
-		    user = User.new(new_user_params) if user.nil?
 
-		    # Handle API approval
-		    ReviewableUser.set_approved_fields!(user, current_user) if user.approved?
+		    user = User.where(staged: true).with_email(new_user_params[:email].strip.downcase).first
+
+		    if user
+		      user.active = false
+		      user.unstage!
+		    end
+
+		    user ||= User.new
+		    user.attributes = new_user_params
+
+		    # Handle API approval and
+		    # auto approve users based on auto_approve_email_domains setting
+		    if user.approved? || EmailValidator.can_auto_approve_user?(user.email)
+		      ReviewableUser.set_approved_fields!(user, current_user)
+		    end
 
 		    # Handle custom fields
 		    user_fields = UserField.all
