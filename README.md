@@ -1,5 +1,5 @@
 #### Smart captcha plugin for Discourse / Discourse 智能验证码插件
-
+##### discourse version v2.5.0.beta2
 ##### docker 安装方式
 1、配置`app.yml` 
 ```

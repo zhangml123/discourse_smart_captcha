@@ -15,13 +15,11 @@ after_initialize do
 
 	class ::UsersController
 	  	def create
-	  		
 	  		if SiteSetting.discourse_smart_captcha && !verifyCaptcha
 		      return fail_with("login.verify_failed")
 		    end
-	  		params.require(:email)
+			params.require(:email)
 		    params.require(:username)
-		    params.require(:invite_code) if SiteSetting.require_invite_code
 		    params.permit(:user_fields)
 
 		    unless SiteSetting.allow_new_registrations
@@ -34,10 +32,6 @@ after_initialize do
 
 		    if params[:email].length > 254 + 1 + 253
 		      return fail_with("login.email_too_long")
-		    end
-
-		    if SiteSetting.require_invite_code && SiteSetting.invite_code != params[:invite_code]
-		      return fail_with("login.wrong_invite_code")
 		    end
 
 		    if clashing_with_existing_route?(params[:username]) || User.reserved_username?(params[:username])
@@ -149,7 +143,7 @@ after_initialize do
 		      success: false,
 		      message: I18n.t("login.something_already_taken")
 		    }
-		end
+		  end
 		def verifyCaptcha
 			access_secret = SiteSetting.access_secret
 			param = {} 
