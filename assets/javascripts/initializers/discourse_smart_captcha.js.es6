@@ -55,7 +55,6 @@ function initialize(api) {
                 fail_txt: '验证失败，请在此点击按钮刷新',
                 scaning_txt: '智能检测中',
                 success: function(data) {
-                  
                   const userFields = [];
                   userFields.push(EmberObject.create({field:{id:"sessionId"},value:data.sessionId}))
                   userFields.push(EmberObject.create({field:{id:"token"},value:NVC_Opt.token}))
@@ -71,13 +70,22 @@ function initialize(api) {
                 }
             });
             ic.init();
+            controller.set("ic",ic)
+
           });
       }
-
-
     })
     api.modifyClass('controller:create-account', {
       captchaVerified:false,
+      ic:null,
+      @discourseComputed("formSubmitted","rejectedEmails.[]","rejectedPasswords.[]")
+      initcaptch(){
+        console.log("load ic")
+        if(this.ic){
+          console.log("load ic.init")
+          this.ic.init();
+        }
+      },
       @discourseComputed(
         "passwordRequired",
         "nameValidation.failed",
@@ -90,7 +98,6 @@ function initialize(api) {
         "captchaVerified"
       )
       submitDisabled() {
-
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
