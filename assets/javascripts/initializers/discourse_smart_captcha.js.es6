@@ -88,14 +88,16 @@ function initialize(api) {
         "userFieldsValidation.failed",
         "formSubmitted",
         "inviteCode",
-        "captchaVerified"
+        "captchaVerified",
+        "rejectedEmails.[]"
       )
       submitDisabled() {
         console.log("submitDisabled.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
         console.log(this.ic)
 
-        if (this.formSubmitted){
+        if (this.rejectedEmails.length > 0){
+          console.log("rejectedEmails.length > 0")
           this.ic.reload()
         }
         if (!this.captchaVerified) return true;
