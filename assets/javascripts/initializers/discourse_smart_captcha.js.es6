@@ -78,24 +78,8 @@ function initialize(api) {
     api.modifyClass('controller:create-account', {
       captchaVerified:false,
       ic:null,
-      @discourseComputed(
-        "passwordRequired",
-        "nameValidation.failed",
-        "emailValidation.failed",
-        "usernameValidation.failed",
-        "passwordValidation.failed",
-        "userFieldsValidation.failed",
-        "formSubmitted",
-        "inviteCode",
-        "captchaVerified"
-      )
-      initcaptch(){
-        console.log("initcaptch.formSubmitted")
-        console.log("this.formSubmitted = " + this.formSubmitted)
-        
-        return false;
-      },
-    /*  @discourseComputed(
+     
+     @discourseComputed(
         "passwordRequired",
         "nameValidation.failed",
         "emailValidation.failed",
@@ -110,6 +94,7 @@ function initialize(api) {
         console.log("submitDisabled.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
         console.log(this.ic)
+        if (this.formSubmitted){this.ic.init()}
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
@@ -121,7 +106,7 @@ function initialize(api) {
         if (this.get("userFieldsValidation.failed")) return true;
         if (this.requireInviteCode && !this.inviteCode) return true;
         return false;
-      },*/
+      },
       
     })
 
