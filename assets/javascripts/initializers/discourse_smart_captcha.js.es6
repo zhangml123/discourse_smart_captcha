@@ -78,28 +78,6 @@ function initialize(api) {
     api.modifyClass('controller:create-account', {
       captchaVerified:false,
       ic:null,
-      @discourseComputed("passwordRequired",
-        "nameValidation.failed",
-        "emailValidation.failed",
-        "usernameValidation.failed",
-        "passwordValidation.failed",
-        "userFieldsValidation.failed",
-        "formSubmitted",
-        "inviteCode",
-        "captchaVerified",
-        "rejectedEmails.[]"
-      )
-      reloadCaptch(){
-        console.log("reloadCaptch.reloadCaptch")
-        console.log("this.reloadCaptch = ")
-        console.log(this.ic)
-
-        if (this.rejectedEmails.length > 0){
-          console.log("rejectedEmails.length > 0")
-          this.ic.reload()
-        }
-      },
-     
      @discourseComputed(
         "passwordRequired",
         "nameValidation.failed",
@@ -115,7 +93,13 @@ function initialize(api) {
       submitDisabled() {
         console.log("submitDisabled.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
-        
+        console.log(this.ic)
+
+        if (this.rejectedEmails.length > 0 ){
+          console.log("rejectedEmails.length > 0")
+          this.ic.reload();
+          this.rejectedEmails = []
+        }
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
