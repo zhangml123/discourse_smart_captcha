@@ -78,7 +78,17 @@ function initialize(api) {
     api.modifyClass('controller:create-account', {
       captchaVerified:false,
       ic:null,
-      @discourseComputed("formSubmitted","rejectedEmails.[]","rejectedPasswords.[]")
+      @discourseComputed(
+        "passwordRequired",
+        "nameValidation.failed",
+        "emailValidation.failed",
+        "usernameValidation.failed",
+        "passwordValidation.failed",
+        "userFieldsValidation.failed",
+        "formSubmitted",
+        "inviteCode",
+        "captchaVerified"
+      )
       initcaptch(){
         console.log("initcaptch.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
