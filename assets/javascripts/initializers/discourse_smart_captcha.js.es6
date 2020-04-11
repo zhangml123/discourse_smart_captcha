@@ -92,11 +92,8 @@ function initialize(api) {
       initcaptch(){
         console.log("initcaptch.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
-        console.log("load ic")
-        if(this.ic){
-          console.log("load ic.init")
-          this.ic.init();
-        }
+        
+        return false;
       },
       @discourseComputed(
         "passwordRequired",
@@ -112,7 +109,7 @@ function initialize(api) {
       submitDisabled() {
         console.log("submitDisabled.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
-        
+        console.log(this.ic)
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
