@@ -70,6 +70,11 @@ function initialize(api) {
                 }
             });
             ic.init();
+
+            $("#modal-alert").bind("change", function(){
+
+              console.log("changes1111")
+            })
             controller.set("ic",ic)
 
           });
