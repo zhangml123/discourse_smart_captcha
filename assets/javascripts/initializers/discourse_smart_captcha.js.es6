@@ -70,8 +70,9 @@ function initialize(api) {
                 }
             });
             ic.init();
-
-            $("#modal-alert").bind("change", function(){
+            console.log("#modal-alert")
+            console.log($("#modal-alert"))
+            $("#modal-alert").bind("DOMNodeInserted", function(){
 
               console.log("changes1111")
             })
@@ -102,6 +103,7 @@ function initialize(api) {
 
         if (this.rejectedEmails.length > 0 ){
           console.log("rejectedEmails.length > 0")
+          console.log($("#modal-alert").html())
           this.ic.reset();
           this.rejectedEmails = []
         }
