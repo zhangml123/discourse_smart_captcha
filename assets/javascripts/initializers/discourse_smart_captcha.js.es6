@@ -64,7 +64,7 @@ function initialize(api) {
                 
                 },
                 fail: function(data) {
-                  $("#sc").removeClass("success");
+                 
                   controller.set("captchaVerified", false);
                   console.log('ic error');
                 }
@@ -94,7 +94,10 @@ function initialize(api) {
         console.log("submitDisabled.formSubmitted")
         console.log("this.formSubmitted = " + this.formSubmitted)
         console.log(this.ic)
-        if (this.formSubmitted){this.ic.init()}
+
+        if (this.formSubmitted){
+          this.ic.reload()
+        }
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
