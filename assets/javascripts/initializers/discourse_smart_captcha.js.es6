@@ -43,7 +43,7 @@ function initialize(api) {
       didInsertElement(){
         this._super();
         const controller = showModal("create-account");      
-        $("#discourse-modal").find(".modal-body").after("<div id='sc' style='margin:20px' ></div>")
+        $("#discourse-modal").find(".modal-body").after("<div id='sc' style='padding:20px;width:300px;margin:0 auto' ></div>")
           loadScript("/plugins/discourse_smart_captcha/javascripts/smartCaptcha/0.0.4/index.js"
           ).then(() => {
               var ic = new smartCaptcha({
@@ -80,6 +80,8 @@ function initialize(api) {
       ic:null,
       @discourseComputed("formSubmitted","rejectedEmails.[]","rejectedPasswords.[]")
       initcaptch(){
+        console.log("initcaptch.formSubmitted")
+        console.log("this.formSubmitted = " + this.formSubmitted)
         console.log("load ic")
         if(this.ic){
           console.log("load ic.init")
@@ -98,6 +100,9 @@ function initialize(api) {
         "captchaVerified"
       )
       submitDisabled() {
+        console.log("submitDisabled.formSubmitted")
+        console.log("this.formSubmitted = " + this.formSubmitted)
+        
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
