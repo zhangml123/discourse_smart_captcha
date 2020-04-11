@@ -95,7 +95,7 @@ function initialize(api) {
         
         return false;
       },
-      @discourseComputed(
+    /*  @discourseComputed(
         "passwordRequired",
         "nameValidation.failed",
         "emailValidation.failed",
@@ -121,7 +121,7 @@ function initialize(api) {
         if (this.get("userFieldsValidation.failed")) return true;
         if (this.requireInviteCode && !this.inviteCode) return true;
         return false;
-      },
+      },*/
       
     })
 
