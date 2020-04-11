@@ -92,12 +92,12 @@ function initialize(api) {
       )
       submitDisabled() {
         console.log("submitDisabled.formSubmitted")
-        console.log("this.formSubmitted = " + this.formSubmitted)
+        console.log("this.formSubmitted 1111111= " + this.formSubmitted)
         console.log(this.ic)
 
         if (this.rejectedEmails.length > 0 ){
           console.log("rejectedEmails.length > 0")
-          this.ic.reload();
+          this.ic.reset();
           this.rejectedEmails = []
         }
         if (!this.captchaVerified) return true;
