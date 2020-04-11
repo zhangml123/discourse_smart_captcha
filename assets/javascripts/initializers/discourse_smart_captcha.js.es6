@@ -70,20 +70,18 @@ function initialize(api) {
                 }
             });
             ic.init();
-            console.log("#modal-alert")
-            console.log($("#modal-alert"))
+            
             $("#modal-alert").bind("DOMNodeInserted", function(){
-
-              console.log("changes1111")
+              ic.reset();
+              console.log("changes3333")
             })
-            controller.set("ic",ic)
+           
 
           });
       }
     })
     api.modifyClass('controller:create-account', {
       captchaVerified:false,
-      ic:null,
      @discourseComputed(
         "passwordRequired",
         "nameValidation.failed",
@@ -93,20 +91,10 @@ function initialize(api) {
         "userFieldsValidation.failed",
         "formSubmitted",
         "inviteCode",
-        "captchaVerified",
-        "rejectedEmails.[]"
+        "captchaVerified"
       )
       submitDisabled() {
-        console.log("submitDisabled.formSubmitted")
-        console.log("this.formSubmitted 1111111= " + this.formSubmitted)
-        console.log(this.ic)
-
-        if (this.rejectedEmails.length > 0 ){
-          console.log("rejectedEmails.length > 0")
-          console.log($("#modal-alert").html())
-          this.ic.reset();
-          this.rejectedEmails = []
-        }
+       
         if (!this.captchaVerified) return true;
         if (this.formSubmitted) return true;
         if (this.get("nameValidation.failed")) return true;
