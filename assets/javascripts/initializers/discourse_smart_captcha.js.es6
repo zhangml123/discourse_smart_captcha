@@ -73,7 +73,8 @@ function initialize(api) {
             
             $("#modal-alert").bind("DOMNodeInserted", function(){
               ic.reset();
-              console.log("changes3333")
+              controller.set("captchaVerified", false);
+              
             })
            
 
