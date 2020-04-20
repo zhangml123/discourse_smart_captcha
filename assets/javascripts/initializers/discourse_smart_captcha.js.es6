@@ -47,7 +47,7 @@ function initialize(api) {
         const  success_txt = I18n.t("captcha.success_txt") 
         const  fail_txt = I18n.t("captcha.fail_txt") 
         const  scaning_txt = I18n.t("captcha.scaning_txt")  
-        $("#discourse-modal").find(".modal-body").after("<div id='sc' style='padding:20px;width:300px;margin:0 auto' ></div>")
+        $("#discourse-modal").find(".modal-body").after("<div id='sc' style='padding:20px;width:300px;margin:0 auto;padding-top:0px' ></div>")
           loadScript("/plugins/discourse_smart_captcha/javascripts/smartCaptcha/0.0.4/index.js"
           ).then(() => {
               var ic = new smartCaptcha({
