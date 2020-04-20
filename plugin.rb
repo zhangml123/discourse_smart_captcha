@@ -201,4 +201,5 @@ end
 
 register_css <<EOF
     #SM_BTN_1 { margin: 0 auto; }
+    .login-form form table {width : 100% !important }
 EOF
