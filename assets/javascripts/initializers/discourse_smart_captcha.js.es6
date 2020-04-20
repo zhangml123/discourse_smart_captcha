@@ -42,7 +42,11 @@ function initialize(api) {
     api.modifyClass('component:create-account', {
       didInsertElement(){
         this._super();
-        const controller = showModal("create-account");      
+        const controller = showModal("create-account");   
+        const  default_txt = I18n.t("captcha.default_txt")
+        const  success_txt = I18n.t("captcha.success_txt") 
+        const  fail_txt = I18n.t("captcha.fail_txt") 
+        const  scaning_txt = I18n.t("captcha.scaning_txt")  
         $("#discourse-modal").find(".modal-body").after("<div id='sc' style='padding:20px;width:300px;margin:0 auto' ></div>")
           loadScript("/plugins/discourse_smart_captcha/javascripts/smartCaptcha/0.0.4/index.js"
           ).then(() => {
@@ -50,10 +54,10 @@ function initialize(api) {
                 renderTo: '#sc',
                 width: 300,
                 height: 42,
-                default_txt: '点击按钮开始智能验证',
-                success_txt: '验证成功',
-                fail_txt: '验证失败，请在此点击按钮刷新',
-                scaning_txt: '智能检测中',
+                default_txt: default_txt,
+                success_txt: success_txt,
+                fail_txt: fail_txt,
+                scaning_txt: scaning_txt,
                 success: function(data) {
                   const userFields = [];
                   userFields.push(EmberObject.create({field:{id:"sessionId"},value:data.sessionId}))
@@ -64,7 +68,6 @@ function initialize(api) {
                 
                 },
                 fail: function(data) {
-                 
                   controller.set("captchaVerified", false);
                   console.log('ic error');
                 }

@@ -1,2 +1,7 @@
 en:
   js:
+    captcha:
+      default_txt: "Click the button to start smart verification"
+      success_txt: "Successful verification"
+      fail_txt: "Verification failed, please click here to refresh"
+      scaning_txt: "Intelligent detection"

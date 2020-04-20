@@ -1,2 +1,7 @@
 zh_CN:
   js:
+    captcha:
+      default_txt: "点击按钮开始智能验证"
+      success_txt: "验证成功"
+      fail_txt: "验证失败，请在此点击按钮刷新"
+      scaning_txt: "智能检测中"
