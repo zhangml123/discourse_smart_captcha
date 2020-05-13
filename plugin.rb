@@ -200,6 +200,7 @@ after_initialize do
 end
 
 register_css <<EOF
-    #SM_BTN_1 { margin: 0 auto; }
+    #SM_BTN_1 { width: 100%; margin: 0 auto; }
+    #SM_BTN_WRAPPER_1 {    padding: 1em;}
     .login-form form table {width : 100% !important }
 EOF
