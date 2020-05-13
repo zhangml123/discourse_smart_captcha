@@ -202,5 +202,6 @@ end
 register_css <<EOF
     #SM_BTN_1 { width: 100%; margin: 0 auto; }
     #SM_BTN_WRAPPER_1 {    padding: 1em;}
+    #rectMask{    width: calc(100% - 2em + 2px) !important;top: 1em !important; left: 1em !important; }
     .login-form form table {width : 100% !important }
 EOF
